@@ -19,11 +19,11 @@ export class AuthService {
 		);
 	}
 
-	signIn(username: string, password: string): AuthResponseDto {
+	async signIn(username: string, password: string): Promise<AuthResponseDto> {
 		let user: UserDto;
 
 		try {
-			user = this.usersService.findByUsername(username);
+			user = await this.usersService.findByUsername(username);
 		} catch (error) {
 			throw new UnauthorizedException();
 		}

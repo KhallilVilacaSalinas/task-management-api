@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'user '})
+@Entity({ name: 'user'})
 export class UserEntity {
     @PrimaryGeneratedColumn('uuid')
 	id: string;
@@ -8,6 +8,6 @@ export class UserEntity {
     @Column({ type: 'varchar' })
 	username: string;
 
-    @Column({ type: 'varchar' })
+    @Column({ type: 'varchar', name: 'password_hash'})
 	password: string;
 }

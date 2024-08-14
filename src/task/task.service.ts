@@ -6,15 +6,28 @@ import {
 } from '@nestjs/common';
 import { FindAllParameters, TaskDto, TaskStatusEnum } from './task.dto';
 import { v4 as uuid } from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { TaskEntity } from 'src/db/entities/task.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TaskService {
+	constructor(
+		@InjectRepository(TaskEntity)
+		private readonly taskRepository: Repository<TaskEntity>
+	) {}
+
 	private tasks: TaskDto[] = [];
 
 	create(task: TaskDto) {
-		task.id = uuid();
-		task.status = TaskStatusEnum.TO_DO
-		this.tasks.push(task);
+		const taskToSave: TaskEntity = {
+			title: task.title,
+			description: task.description,
+			expirationDate: task.expirationDate,
+			status: TaskStatusEnum.TO_DO
+		}
+
+		const 
 	}
 
 	findById(id: string): TaskDto {
